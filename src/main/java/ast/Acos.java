@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Acos extends UnaryOperation {
 
 	public Acos(Operation op) {
@@ -10,6 +12,11 @@ public class Acos extends UnaryOperation {
 	public String toString(){
 		return "acos(" + op.toString() + ")";
  	}
+
+	@Override
+	public Operation accept(Visitor v) {
+		return v.visit(this);
+	}
 
 	@Override
 	public Double getNumericResult(Double val) {
@@ -25,11 +32,7 @@ public class Acos extends UnaryOperation {
 		return (op.equals(abs.op));
 	}
 
-	@Override
-	public Operation getDerivative() {
-		return new Negate(new Division(op.getDerivative(), new Sqrt(new Substraction(new Constant("1"), new Pow(op, new Constant("2"))))));
-	}
-	
+
 	public int hashCode(){
 		return 11 * op.hashCode();
 	}

@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Exp extends UnaryOperation {
 	
 	public Exp(Operation op) {
@@ -12,13 +14,13 @@ public class Exp extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.exp(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Product(new Exp(op), op.getDerivative());
+	public Double getNumericResult(Double val) {
+		return Math.exp(op.getNumericResult(val));
 	}
 
 	@Override

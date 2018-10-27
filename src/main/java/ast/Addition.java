@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Addition extends BinaryOperation {
 
 	public Addition(Operation left, Operation right) {
@@ -20,15 +22,15 @@ public class Addition extends BinaryOperation {
 	public String toString(){
 		return left.toString() + "+" + right.toString();
 	}
-	
+
+	@Override
+	public Operation accept(Visitor v) {
+		return v.visit(this);
+	}
+
 	public Double getNumericResult(Double val)
 	{
 		return left.getNumericResult(val) + right.getNumericResult(val);
-	}
-
-	@Override
-	public Operation getDerivative() {
-		return new Addition(left.getDerivative(), right.getDerivative());
 	}
 
 	@Override

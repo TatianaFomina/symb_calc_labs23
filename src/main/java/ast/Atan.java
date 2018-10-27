@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Atan extends UnaryOperation {
 
 	public Atan(Operation op) {
@@ -12,13 +14,13 @@ public class Atan extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.atan(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Division(op.getDerivative(), new Addition(new Constant("1"), new Pow(new Cos(op), new Constant("2"))));
+	public Double getNumericResult(Double val) {
+		return Math.atan(op.getNumericResult(val));
 	}
 
 	@Override

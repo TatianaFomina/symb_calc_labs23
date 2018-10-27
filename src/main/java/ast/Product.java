@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Product extends BinaryOperation {
 
 	public Product(Operation left, Operation right) {
@@ -21,13 +23,13 @@ public class Product extends BinaryOperation {
 	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return left.getNumericResult(val) * right.getNumericResult(val);
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Addition(new Product(left.getDerivative(), right), new Product(left, right.getDerivative()));
+	public Double getNumericResult(Double val) {
+		return left.getNumericResult(val) * right.getNumericResult(val);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Asin extends UnaryOperation {
 
 	public Asin(Operation op) {
@@ -12,13 +14,13 @@ public class Asin extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.asin(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Division(op.getDerivative(), new Sqrt(new Substraction(new Constant("1"), new Pow(op, new Constant("2")))));
+	public Double getNumericResult(Double val) {
+		return Math.asin(op.getNumericResult(val));
 	}
 
 	@Override

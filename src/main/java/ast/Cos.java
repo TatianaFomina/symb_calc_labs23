@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Cos extends UnaryOperation {
 
 	public Cos(Operation op) {
@@ -12,13 +14,13 @@ public class Cos extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.cos(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Negate(new Product(new Sin(op), op.getDerivative()));
+	public Double getNumericResult(Double val) {
+		return Math.cos(op.getNumericResult(val));
 	}
 
 	@Override

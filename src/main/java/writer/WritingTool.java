@@ -106,7 +106,7 @@ public class WritingTool {
             String operationStr = operation.toString();
             String operationName = operationStr.substring(0, operationStr.indexOf('('));
             //return operation.toString();// + writeEqn(unaryOperation.getOp());
-            return operationName +"{" + writeEqn(unaryOperation.getOp()) + "}";
+            return operationName +"(" + writeEqn(unaryOperation.getOp()) + ")";
         }else return operation.toString();
 
         return null;

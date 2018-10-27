@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Negate extends UnaryOperation {
 
 	public Negate(Operation op) {
@@ -11,13 +13,13 @@ public class Negate extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return -op.getNumericResult(val);
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Negate(op.getDerivative());
+	public Double getNumericResult(Double val) {
+		return -op.getNumericResult(val);
 	}
 
 	@Override

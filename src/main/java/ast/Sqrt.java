@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Sqrt extends UnaryOperation {
 	
 	public Sqrt(Operation op) {
@@ -13,13 +15,13 @@ public class Sqrt extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.sqrt(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Division(op.getDerivative(), new Product(new Constant("2"), new Sqrt(op) ));
+	public Double getNumericResult(Double val) {
+		return Math.sqrt(op.getNumericResult(val));
 	}
 
 	@Override

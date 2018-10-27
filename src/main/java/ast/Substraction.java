@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Substraction extends BinaryOperation {
 
 	public Substraction(Operation left, Operation right) {
@@ -21,13 +23,13 @@ public class Substraction extends BinaryOperation {
 	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return left.getNumericResult(val) - right.getNumericResult(val);
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Substraction(left.getDerivative(), right.getDerivative());
+	public Double getNumericResult(Double val) {
+		return left.getNumericResult(val) - right.getNumericResult(val);
 	}
 
 	@Override

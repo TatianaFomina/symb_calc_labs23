@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class SimpleVar implements Operation {
 	
 	public String toString(){
@@ -7,14 +9,14 @@ public class SimpleVar implements Operation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		if (val == null) throw new NullPointerException("Variable set to null!");
-		return val;
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Constant("1");
+	public Double getNumericResult(Double val) {
+		if (val == null) throw new NullPointerException("Variable set to null!");
+		return val;
 	}
 
 	@Override

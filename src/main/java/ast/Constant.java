@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Constant implements Operation {
 	private String c;
 	
@@ -12,13 +14,13 @@ public class Constant implements Operation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Double.parseDouble(c);
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Constant("0");
+	public Double getNumericResult(Double val) {
+		return Double.parseDouble(c);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Pow extends BinaryOperation {
 	public Pow(Operation left, Operation right) {
 		super(left,right);
@@ -12,15 +14,13 @@ public class Pow extends BinaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.pow(left.getNumericResult(val), right.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		Operation firstTerm = new Pow(left, right);
-		Operation secondTerm = new Addition(new Product(right.getDerivative(), new Log(left)), new Division(new Product(left.getDerivative(), right) , left));
-		return new Product(firstTerm, secondTerm);
+	public Double getNumericResult(Double val) {
+		return Math.pow(left.getNumericResult(val), right.getNumericResult(val));
 	}
 
 	@Override

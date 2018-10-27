@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Division extends BinaryOperation {
 
 	public Division(Operation left, Operation right) {
@@ -21,15 +23,13 @@ public class Division extends BinaryOperation {
 	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return left.getNumericResult(val) / right.getNumericResult(val);
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		Operation numerator = new Substraction(new Product(left.getDerivative(), right), new Product(left, right.getDerivative()));
-		Operation denominator = new Pow(right, new Constant("2"));
-		return new Division(numerator, denominator);
+	public Double getNumericResult(Double val) {
+		return left.getNumericResult(val) / right.getNumericResult(val);
 	}
 
 	@Override

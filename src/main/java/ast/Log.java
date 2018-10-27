@@ -1,5 +1,7 @@
 package ast;
 
+import visitor.Visitor;
+
 public class Log extends UnaryOperation {
 	
 	public Log(Operation op) {
@@ -12,13 +14,13 @@ public class Log extends UnaryOperation {
  	}
 
 	@Override
-	public Double getNumericResult(Double val) {
-		return Math.log(op.getNumericResult(val));
+	public Operation accept(Visitor v) {
+		return v.visit(this);
 	}
 
 	@Override
-	public Operation getDerivative() {
-		return new Division(op.getDerivative(), op);
+	public Double getNumericResult(Double val) {
+		return Math.log(op.getNumericResult(val));
 	}
 
 	@Override
