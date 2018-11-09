@@ -1,11 +1,16 @@
 package parser;
 
 import ast.*;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,14 +21,27 @@ public class ParsingTool {
 
     private String fileString;
 
-    public ParsingTool(String filename)throws IOException, ParserException {
-        try{
+    public ParsingTool()throws IOException, ParserException {
+
+
+    }
+
+    public Operation parse(String filename) throws ParserException {
+        try {
             fileString = readFile(filename, Charset.defaultCharset());
+            JSONObject rawSchema = new JSONObject(readFile("schema.json", Charset.defaultCharset()));
+            Schema schema = SchemaLoader.load(rawSchema);
+            schema.validate(new JSONObject(fileString)); // throws a ValidationException if this object is invalid
+
+        }catch (ValidationException e){
+            throw new ParserException("File " + filename + " contains invalid JSON format");
         }catch (IOException e){
             throw new ParserException("Unable to read file: " + filename);
         }
 
+        return getTree();
     }
+
 
     private String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
@@ -60,7 +78,7 @@ public class ParsingTool {
         }
     }
 
-    public Operation getTree() throws ParserException {
+    private Operation getTree() throws ParserException {
         JSONObject obj = new JSONObject(fileString);
         return getTree((JSONObject)obj);
     }

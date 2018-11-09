@@ -21,9 +21,9 @@ public class App
 //        String filename = sc.next();
 
         //ParsingTool parsingTool = new ParsingTool(filename);
-        ParsingTool parsingTool = new ParsingTool("exp_tree2.json"); //stub
+        ParsingTool parsingTool = new ParsingTool(); //stub
 
-        Operation expressionTree = parsingTool.getTree();
+        Operation expressionTree = parsingTool.parse("exp_tree2.json");
         Operation derivative = expressionTree.accept(new DerivativeVisitor());
         System.out.println(derivative);
 
