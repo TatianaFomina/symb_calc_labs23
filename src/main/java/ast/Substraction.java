@@ -1,6 +1,7 @@
 package ast;
 
 import visitor.Visitor;
+import writer.Writer;
 
 public class Substraction extends BinaryOperation {
 
@@ -25,6 +26,11 @@ public class Substraction extends BinaryOperation {
 	@Override
 	public Operation accept(Visitor v) {
 		return v.visit(this);
+	}
+
+	@Override
+	public String acceptWriter(Writer w) {
+		return w.visit(this);
 	}
 
 	@Override

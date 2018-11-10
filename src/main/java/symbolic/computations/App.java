@@ -7,8 +7,11 @@ import parser.ParserException;
 import parser.ParsingTool;
 import visitor.DerivativeVisitor;
 import visitor.Visitor;
+import writer.EqnWriter;
 import writer.WritingTool;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -16,19 +19,18 @@ import java.util.Scanner;
 public class App 
 {
     public static void main( String[] args ) throws IOException, ParserException {
-//        System.out.print("Input path to the file which contains JSON expression tree: ");
-//        Scanner sc = new Scanner(System.in);
-//        String filename = sc.next();
-
-        //ParsingTool parsingTool = new ParsingTool(filename);
         ParsingTool parsingTool = new ParsingTool(); //stub
 
         Operation expressionTree = parsingTool.parse("exp_tree2.json");
         Operation derivative = expressionTree.accept(new DerivativeVisitor());
         System.out.println(derivative);
 
-        WritingTool writer = new WritingTool(derivative);
-        writer.writeTo("result.eqn");
+        //writing result
+        BufferedWriter writer = new BufferedWriter(new FileWriter("result1.eqn"));
+        writer.write(".EQ\n");
+        writer.write(expressionTree.acceptWriter(new EqnWriter()));
+        writer.write("\n.EN");
+        writer.close();
 
     }
 }

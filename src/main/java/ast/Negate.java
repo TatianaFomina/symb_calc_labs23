@@ -1,6 +1,7 @@
 package ast;
 
 import visitor.Visitor;
+import writer.Writer;
 
 public class Negate extends UnaryOperation {
 
@@ -15,6 +16,11 @@ public class Negate extends UnaryOperation {
 	@Override
 	public Operation accept(Visitor v) {
 		return v.visit(this);
+	}
+
+	@Override
+	public String acceptWriter(Writer w) {
+		return w.visit(this);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package ast;
 
 import visitor.Visitor;
+import writer.Writer;
 
 public class Sin extends UnaryOperation {
 
@@ -21,6 +22,11 @@ public class Sin extends UnaryOperation {
 	@Override
 	public Double getNumericResult(Double val) {
 		return Math.sin(op.getNumericResult(val));
+	}
+
+	@Override
+	public String acceptWriter(Writer w) {
+		return w.visit(this);
 	}
 
 	@Override
