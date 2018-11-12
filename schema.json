@@ -1,0 +1,155 @@
+{
+  "definitions": {
+    "operator": {
+      "type": "string",
+      "enum": [
+        "+",
+        "-",
+        "/",
+        "*",
+        "^"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "Identifier": {
+      "type": "string",
+      "examples": [
+        "x",
+        "y"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "Binary": {
+      "type": "object",
+      "required": [
+        "operator",
+        "left",
+        "right"
+      ],
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/operator"
+        },
+        "left": {
+          "$ref": "#/definitions/expression"
+        },
+        "right": {
+          "$ref": "#/definitions/expression"
+        }
+      }
+    },
+    "expression": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "Binary"
+          ]
+        },
+        {
+          "required": [
+            "Unary"
+          ]
+        },
+        {
+          "required": [
+            "FunctionCall"
+          ]
+        },
+        {
+          "required": [
+            "Identifier"
+          ]
+        },
+        {
+          "required": [
+            "Number"
+          ]
+        }
+      ],
+      "properties": {
+        "Binary": {
+          "$ref": "#/definitions/Binary"
+        },
+        "Unary": {
+          "$ref": "#/definitions/Unary"
+        },
+        "FunctionCall": {
+          "$ref": "#/definitions/FunctionCall"
+        },
+        "Idetifier": {
+          "$ref": "#/definitions/Identifier"
+        },
+        "Number": {
+          "$ref": "#/definitions/Number"
+        }
+      }
+    },
+    "Number": {
+      "type": "string",
+      "pattern": "^(.*)$"
+    },
+    "Unary": {
+      "type": "object",
+      "required": [
+        "operator",
+        "expression"
+      ],
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/operator"
+        },
+        "expression": {
+          "$ref": "#/definitions/expression"
+        }
+      }
+    },
+    "FunctionCall": {
+      "type": "object",
+      "required": [
+        "name",
+        "args"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "sin",
+            "cos",
+            "tan",
+            "atan",
+            "asin",
+            "acos",
+            "abs",
+            "log",
+            "exp",
+            "sqrt"
+          ]
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "0": {
+                "$ref": "#/definitions/expression"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "The Root Schema",
+  "properties": {
+    "Expression": {
+      "$ref": "#/definitions/expression"
+    }
+  },
+  "required": [
+    "Expression"
+  ]
+}

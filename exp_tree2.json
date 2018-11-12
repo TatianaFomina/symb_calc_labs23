@@ -1,0 +1,27 @@
+{
+  "Expression":{
+    "Unary" : {
+      "operator" : "-",
+      "expression" : {
+        "FunctionCall":{
+          "name" : "sin",
+          "args" : [
+            {
+              "0": {
+                "Binary" :{
+                  "operator": "*",
+                  "left" : {
+                    "Number" : "2"
+                  },
+                  "right":{
+                    "Identifier" : "x"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

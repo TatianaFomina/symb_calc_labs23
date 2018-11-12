@@ -1,0 +1,50 @@
+{
+  "Expression": {
+    "Binary":{
+      "operator": "+",
+      "left":{
+        "Binary":
+        {
+          "operator": "+",
+          "left":{
+            "Binary":{
+              "operator": "*",
+              "left" : {
+                "Number" : "2"
+              },
+              "right":{
+                "Identifier" : "x"
+              }
+
+            }
+          },
+          "right" : {
+            "FunctionCall" : {
+              "name" : "sqrt",
+              "args" : [
+                {
+                  "0": {
+                    "Binary" :{
+                      "operator" : "*",
+                      "left" : {
+                        "Number" : "3"
+                      },
+                      "right": {
+                        "Identifier":"x"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "right":{
+        "Number":"6"
+      }
+    }
+  }
+}
+
+
