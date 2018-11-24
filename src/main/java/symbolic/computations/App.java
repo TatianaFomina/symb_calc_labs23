@@ -3,8 +3,8 @@ package symbolic.computations;
 import ast.BinaryOperation;
 import ast.Operation;
 import ast.UnaryOperation;
+import parser.JsonParser;
 import parser.ParserException;
-import parser.ParsingTool;
 import visitor.DerivativeVisitor;
 import visitor.Visitor;
 import writer.EqnWriter;
@@ -19,9 +19,9 @@ import java.util.Scanner;
 public class App 
 {
     public static void main( String[] args ) throws IOException, ParserException {
-        ParsingTool parsingTool = new ParsingTool(); //stub
-
-        Operation expressionTree = parsingTool.parse("exp_tree2.json");
+        //ParsingTool parsingTool = new ParsingTool(); //stub
+        JsonParser parser = new JsonParser();
+        Operation expressionTree = parser.getAbstractSyntaxTree("exp_tree2.json");
         Operation derivative = expressionTree.accept(new DerivativeVisitor());
         System.out.println(derivative);
 
