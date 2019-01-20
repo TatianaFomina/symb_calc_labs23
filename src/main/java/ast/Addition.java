@@ -1,5 +1,6 @@
 package ast;
 
+import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
@@ -27,6 +28,11 @@ public class Addition extends BinaryOperation {
 	@Override
 	public Operation accept(Visitor v) {
 		return v.visit(this);
+	}
+
+	@Override
+	public Operation accept(Computator c) {
+		return c.compute(this);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package ast;
 
+import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
@@ -27,6 +28,11 @@ public class Pow extends BinaryOperation {
 	@Override
 	public Double getNumericResult(Double val) {
 		return Math.pow(left.getNumericResult(val), right.getNumericResult(val));
+	}
+
+	@Override
+	public Operation accept(Computator c) {
+		return c.compute(this);
 	}
 
 	@Override

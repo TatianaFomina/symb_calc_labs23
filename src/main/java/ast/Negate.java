@@ -1,5 +1,6 @@
 package ast;
 
+import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
@@ -21,6 +22,11 @@ public class Negate extends UnaryOperation {
 	@Override
 	public String acceptWriter(Writer w) {
 		return w.visit(this);
+	}
+
+	@Override
+	public Operation accept(Computator c) {
+		return c.compute(this);
 	}
 
 	@Override

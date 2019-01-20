@@ -1,5 +1,6 @@
 package ast;
 
+import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
@@ -23,6 +24,11 @@ public class SimpleVar implements Operation {
 	public Double getNumericResult(Double val) {
 		if (val == null) throw new NullPointerException("Variable set to null!");
 		return val;
+	}
+
+	@Override
+	public Operation accept(Computator c) {
+		return c.compute(this);
 	}
 
 	@Override

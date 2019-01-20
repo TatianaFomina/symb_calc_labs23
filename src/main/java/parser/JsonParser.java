@@ -5,6 +5,7 @@ import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import parser.jsonoperations.*;
 
@@ -12,9 +13,19 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class JsonParser implements Parser {
+
+    private Map<String, Operation> context = new HashMap<>();
+
+    public JsonParser(Map<String, Operation> context){
+        this.context = context;
+    }
+
+    public JsonParser(){}
 
     private String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
@@ -54,21 +65,24 @@ public class JsonParser implements Parser {
         }
     }
 
-    private Operation getOperation(JSONObject jsonObject){
+    public Operation getOperation(JSONObject jsonObject){
         Iterator<String> keys = jsonObject.keys();
         String key = keys.next();
-        String content = jsonObject.get(key).toString();
+        //JSONObject jsonContent = (JSONObject)jsonObject.get(key);
+       // if (jsonContent.get("Differentiation"))
+        String content = jsonObject.get(key).toString(); //if contains this -> save to context
         switch(key){
             case "Binary":          return (new JsonBinaryOperation(content)).accept(this);
             case "FunctionCall":    return (new JsonFunction(content)).accept(this);
             case "Unary":           return (new JsonUnaryOperation(content)).accept(this);
             case "Identifier":      return (new JsonIdentifier(content)).accept(this);
             case "Number":          return (new JsonConstant(content)).accept(this);
+            case "Differentiation": return (new JsonDerivativeOperation(content).accept(this));
             default:                return null;
         }
     }
 
-    private UnaryOperation getFunction(String functionName, Operation arg){
+    private Operation getFunction(String functionName, Operation arg){
         switch (functionName)
         {
             case "acos":    return new Acos(arg);
@@ -89,8 +103,22 @@ public class JsonParser implements Parser {
     public Operation parse(JsonBinaryOperation operation) {
         JSONObject operationJSON = new JSONObject(operation.getContent());
         String operatorSymbol = (String)operationJSON.get("operator");
-        Operation left = getOperation((JSONObject)operationJSON.get("left"));
-        Operation right = getOperation((JSONObject)operationJSON.get("right"));
+        Operation left, right;
+        try{
+            String key = operationJSON.getString("left"); //this_left
+            left = context.get(key);
+        }catch(JSONException e){
+            left = getOperation((JSONObject)operationJSON.get("left"));
+        }
+
+        try{
+            String key = operationJSON.getString("right");  //this_right
+            right = context.get(key);
+        }catch(JSONException e){
+            right = getOperation((JSONObject)operationJSON.get("right"));
+        }
+         //left = getOperation((JSONObject)operationJSON.get("left"));
+        //Operation right = getOperation((JSONObject)operationJSON.get("right"));
         return getOperation(operatorSymbol, left, right);
     }
 
@@ -111,7 +139,14 @@ public class JsonParser implements Parser {
         if (operandsIterator.hasNext())
             index = (JSONObject)operandsIterator.next();
         else return null;
-        Operation operand = getOperation((JSONObject)index.get("0"));
+        Operation operand;
+        try{
+            String key = index.getString("0");
+            operand = context.get(key);
+        }catch(JSONException e){
+            operand = getOperation((JSONObject)index.get("0"));
+        }
+        /*Operation */
         return getFunction(functionName, operand);
     }
 
@@ -124,5 +159,12 @@ public class JsonParser implements Parser {
     public Operation parse(JsonConstant operation) {
         String constant = operation.getContent();
         return new Constant(constant);
+    }
+
+    public Operation parse(JsonDerivativeOperation operation) {
+        JSONObject expressionJSON = new JSONObject(operation.getContent());
+        String key = expressionJSON.getString("key");
+        //JSONObject content = context.get(key);
+        return new DelayedDifferentiation(context.get(key));
     }
 }

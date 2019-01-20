@@ -1,0 +1,438 @@
+{
+    "Differentiation": [
+        {
+            "Addition": {
+                "Binary": {
+                    "operator": "+",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_left"
+                        }
+                    },
+                    "right": {
+                        "Differentiation": {
+                            "key": "this_right"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "Subtraction": {
+                "Binary": {
+                    "operator": "-",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_left"
+                        }
+                    },
+                    "right": {
+                        "Differentiation": {
+                            "key": "this_right"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "Product": {
+                "Binary": {
+                    "operator": "+",
+                    "left": {
+                        "Binary": {
+                            "operator": "*",
+                            "left": "this_left",
+                            "right": {
+                                "Differentiation": {
+                                    "key": "this_right"
+                                }
+                            }
+                        }
+                    },
+                    "right": {
+                        "Binary": {
+                            "operator": "*",
+                            "left": {
+                                "Differentiation": {
+                                    "key": "this_left"
+                                }
+                            },
+                            "right": "this_right"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "Division": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Binary": {
+                            "operator": "-",
+                            "left": {
+                                "Binary": {
+                                    "operator": "*",
+                                    "left": "this_left",
+                                    "right": {
+                                        "Differentiation": {
+                                            "key": "this_right"
+                                        }
+                                    }
+                                }
+                            },
+                            "right": {
+                                "Binary": {
+                                    "operator": "*",
+                                    "left": {
+                                        "Differentiation": {
+                                            "key": "this_left"
+                                        }
+                                    },
+                                    "right": "this_right"
+                                }
+                            }
+                        }
+                    },
+                    "right": {
+                        "Binary": {
+                            "operator": "^",
+                            "left": "this_right",
+                            "right": {
+                                "Number": "2"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "Pow": {
+                "Binary": {
+                    "operator": "*",
+                    "left": {
+                        "Binary": {
+                            "operator": "^",
+                            "left": "this_left",
+                            "right": "this_right"
+                        }
+                    },
+                    "right": {
+                        "FunctionCall": {
+                            "name": "log",
+                            "args": [
+                                {
+                                    "0": "this_left"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "Negate": {
+                "Unary": {
+                    "operator": "-",
+                    "expression": {
+                        "Differentiation": {
+                            "key": "this_expression"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "acos": {
+                "Unary": {
+                    "operator": "-",
+                    "expression": {
+                        "Binary": {
+                            "operator": "/",
+                            "left": {
+                                "Differentiation": {
+                                    "key": "this_arg"
+                                }
+                            },
+                            "right": {
+                                "FunctionCall": {
+                                    "name": "sqrt",
+                                    "args": [
+                                        {
+                                            "0": {
+                                                "Binary": {
+                                                    "operator": "-",
+                                                    "left": {
+                                                        "Number": "1"
+                                                    },
+                                                    "right": {
+                                                        "Binary": {
+                                                            "operator": "^",
+                                                            "left": "this_arg",
+                                                            "right": {
+                                                                "Number": "2"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "asin": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    },
+                    "right": {
+                        "FunctionCall": {
+                            "name": "sqrt",
+                            "args": [
+                                {
+                                    "0": {
+                                        "Binary": {
+                                            "operator": "-",
+                                            "left": {
+                                                "Number": "1"
+                                            },
+                                            "right": {
+                                                "Binary": {
+                                                    "operator": "^",
+                                                    "left": "this_arg",
+                                                    "right": {
+                                                        "Number": "2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "atan": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    },
+                    "right": {
+                        "Binary": {
+                            "operator": "+",
+                            "left": {
+                                "Number": "1"
+                            },
+                            "right": {
+                                "Binary": {
+                                    "operator": "^",
+                                    "left": "this_arg",
+                                    "right": {
+                                        "Number": "2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "log": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    },
+                    "right": "this_arg"
+                }
+            }
+        },
+        {
+            "cos": {
+                "Unary": {
+                    "operator": "-",
+                    "expression": {
+                        "Binary": {
+                            "operator": "*",
+                            "left": {
+                                "FunctionCall": {
+                                    "name": "sin",
+                                    "args": [
+                                        {
+                                            "0": "this_arg"
+                                        }
+                                    ]
+                                }
+                            },
+                            "right": {
+                                "Differentiation": {
+                                    "key": "this_arg"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "sin": {
+                "Binary": {
+                    "operator": "*",
+                    "left": {
+                        "FunctionCall": {
+                            "name": "cos",
+                            "args": [
+                                {
+                                    "0": "this_arg"
+                                }
+                            ]
+                        }
+                    },
+                    "right": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "sqrt": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    },
+                    "right": {
+                        "Binary": {
+                            "operator": "*",
+                            "left": {
+                                "Number": "2"
+                            },
+                            "right": {
+                                "FunctionCall": {
+                                    "name": "sqrt",
+                                    "args": [
+                                        {
+                                            "0": "this_arg"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "tan": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    },
+                    "right": {
+                        "Binary": {
+                            "operator": "^",
+                            "left": {
+                                "FunctionCall": {
+                                    "name": "cos",
+                                    "args": [
+                                        {
+                                            "0": "this_arg"
+                                        }
+                                    ]
+                                }
+                            },
+                            "right": {
+                                "Number": "2"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "exp": {
+                "Binary": {
+                    "operator": "*",
+                    "left": {
+                        "FunctionCall": {
+                            "name": "exp",
+                            "args": [
+                                {
+                                    "0": "this_arg"
+                                }
+                            ]
+                        }
+                    },
+                    "right": {
+                        "Differentiation": {
+                            "key": "this_arg"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "abs": {
+                "Binary": {
+                    "operator": "/",
+                    "left": {
+                        "Binary": {
+                            "operator": "*",
+                            "left": {
+                                "FunctionCall": {
+                                    "name": "abs",
+                                    "args": [
+                                        {
+                                            "0": "this_arg"
+                                        }
+                                    ]
+                                }
+                            },
+                            "right": {
+                                "Differentiation": {
+                                    "key": "this_arg"
+                                }
+                            }
+                        }
+                    },
+                    "right": "this_arg"
+                }
+            }
+        },
+        {
+            "Identifier": {
+                "Number": "1"
+            }
+        },
+        {
+            "Number": {
+                "Number": "0"
+            }
+        }
+    ]
+}
