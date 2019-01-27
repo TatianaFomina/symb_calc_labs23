@@ -6,11 +6,13 @@ import writer.Writer;
 
 public class Sqrt extends UnaryOperation {
 	
+	public Sqrt(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Sqrt(Operation op) {
 		super(op);
 	}
-
-
 
 	public String toString(){
 		return "sqrt(" + op.toString() + ")";

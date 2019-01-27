@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Log extends UnaryOperation {
 	
+	public Log(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Log(Operation op) {
 		super(op);
 	}
-
 
 	public String toString(){
 		return "log(" + op.toString() + ")";

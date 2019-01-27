@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Sin extends UnaryOperation {
 
+	public Sin(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Sin(Operation op) {
 		super(op);
 	}
-
 
 	public String toString(){
 		return "sin(" + op.toString() + ")";

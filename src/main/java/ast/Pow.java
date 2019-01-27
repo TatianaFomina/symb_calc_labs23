@@ -5,11 +5,13 @@ import visitor.Visitor;
 import writer.Writer;
 
 public class Pow extends BinaryOperation {
-	public Pow(Operation left, Operation right) {
-		super(left,right);
+	public Pow(Operation left, Operation right, boolean delayed) {
+		super(left, right, delayed);
 	}
 
-
+	public Pow(Operation left, Operation right) {
+		super(left, right);
+	}
 
 	public String toString(){
 		return "(" + left.toString() + ")^(" + right.toString() + ")";

@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Cos extends UnaryOperation {
 
+	public Cos(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Cos(Operation op) {
 		super(op);
 	}
-
 
 	public String toString(){
 		return "cos(" + op.toString() + ")";

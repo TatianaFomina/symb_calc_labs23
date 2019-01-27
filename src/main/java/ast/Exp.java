@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Exp extends UnaryOperation {
 	
+	public Exp(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Exp(Operation op) {
 		super(op);
 	}
-
 
 	public String toString(){
 		return "e^(" + op.toString() + ")";

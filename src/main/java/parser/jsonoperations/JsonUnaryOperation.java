@@ -5,11 +5,11 @@ import org.json.JSONObject;
 import parser.JsonParser;
 
 public class JsonUnaryOperation extends JsonOperation {
-    public JsonUnaryOperation(String content) {
-        super(content);
+    public JsonUnaryOperation(String content, boolean delayed) {
+        super(content, delayed);
     }
 
     public Operation accept(JsonParser p) {
-        return p.parse(this);
+        return p.parse(this, delayed);
     }
 }

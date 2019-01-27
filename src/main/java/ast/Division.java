@@ -6,11 +6,13 @@ import writer.Writer;
 
 public class Division extends BinaryOperation {
 
+	public Division(Operation left, Operation right, boolean delayed) {
+		super(left, right, delayed);
+	}
+
 	public Division(Operation left, Operation right) {
 		super(left, right);
 	}
-
-
 
 	public Operation getLeft(){
 		return left;

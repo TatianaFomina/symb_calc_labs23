@@ -5,8 +5,8 @@ import org.json.JSONObject;
 import parser.JsonParser;
 
 public class JsonIdentifier extends JsonOperation {
-    public JsonIdentifier(String content) {
-        super(content);
+    public JsonIdentifier(String content, boolean delayed) {
+        super(content, delayed);
     }
 
     public Operation accept(JsonParser p) {

@@ -5,6 +5,10 @@ import visitor.Visitor;
 import writer.Writer;
 
 public class DelayedDifferentiation extends UnaryOperation {
+    public DelayedDifferentiation(Operation op, boolean delayed) {
+        super(op, delayed);
+    }
+
     public DelayedDifferentiation(Operation op) {
         super(op);
     }

@@ -6,11 +6,13 @@ import writer.Writer;
 
 public class Addition extends BinaryOperation {
 
-	public Addition(Operation left, Operation right) {
-		super(left, right);
+	public Addition(Operation left, Operation right, boolean delayed) {
+		super(left, right, delayed);
 	}
 
-
+	public Addition(Operation left, Operation right) {
+		super(left, right, false);
+	}
 
 	public Operation getLeft(){
 		return left;

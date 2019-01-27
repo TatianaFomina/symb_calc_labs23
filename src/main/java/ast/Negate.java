@@ -6,6 +6,10 @@ import writer.Writer;
 
 public class Negate extends UnaryOperation {
 
+	public Negate(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Negate(Operation op) {
 		super(op);
 	}

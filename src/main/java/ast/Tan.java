@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Tan extends UnaryOperation {
 
+	public Tan(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
+
 	public Tan(Operation op) {
 		super(op);
 	}
-
 
 	public String toString(){
 		return "tan(" + op.toString() + ")";

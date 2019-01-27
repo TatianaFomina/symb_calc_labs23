@@ -7,7 +7,7 @@ public class DerivativeVisitor implements Visitor {
     @Override
     public Operation visit(Abs operation) {
         Operation operand = operation.getOp();
-        return new Division(new Product(new Abs(operand), operand.accept(this)), operand);
+        return new Division(new Product(new Abs(operand, false), operand.accept(this)), operand);
     }
 
     @Override

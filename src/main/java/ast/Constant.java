@@ -4,10 +4,11 @@ import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
-public class Constant implements Operation {
+public class Constant extends Operation {
 	private String c;
 	
 	public Constant(String c) {
+		super(false);
 		this.c = c;
 	}
 

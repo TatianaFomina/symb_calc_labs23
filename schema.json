@@ -65,6 +65,11 @@
           "required": [
             "Number"
           ]
+        },
+        {
+          "required": [
+            "Predefined"
+          ]
         }
       ],
       "properties": {
@@ -82,12 +87,18 @@
         },
         "Number": {
           "$ref": "#/definitions/Number"
+        },
+        "Predefined": {
+          "$ref": "#/definitions/Predefined"
         }
       }
     },
     "Number": {
       "type": "string",
       "pattern": "^(.*)$"
+    },
+    "Predefined": {
+      "type": "string"
     },
     "Unary": {
       "type": "object",

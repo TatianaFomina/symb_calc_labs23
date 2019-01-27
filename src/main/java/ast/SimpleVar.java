@@ -4,7 +4,7 @@ import computator.Computator;
 import visitor.Visitor;
 import writer.Writer;
 
-public class SimpleVar implements Operation {
+public class SimpleVar extends Operation {
 	
 	public String toString(){
 		return "x";

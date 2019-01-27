@@ -6,10 +6,12 @@ import writer.Writer;
 
 public class Abs extends UnaryOperation {
 	
-	public Abs(Operation op) {
-		super(op);
+	public Abs(Operation op, boolean delayed) {
+		super(op, delayed);
 	}
-
+	public Abs(Operation op) {
+		super(op, false);
+	}
 
 	public String toString(){
 		return "|" + op.toString() + "|";

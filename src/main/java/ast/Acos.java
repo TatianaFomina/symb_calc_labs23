@@ -6,10 +6,13 @@ import writer.Writer;
 
 public class Acos extends UnaryOperation {
 
-	public Acos(Operation op) {
-		super(op);
+	public Acos(Operation op, boolean delayed) {
+		super(op, delayed);
 	}
 
+	public Acos(Operation op) {
+		super(op,false);
+	}
 
 	public String toString(){
 		return "acos(" + op.toString() + ")";

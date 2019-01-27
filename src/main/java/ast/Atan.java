@@ -6,6 +6,9 @@ import writer.Writer;
 
 public class Atan extends UnaryOperation {
 
+	public Atan(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
 	public Atan(Operation op) {
 		super(op);
 	}

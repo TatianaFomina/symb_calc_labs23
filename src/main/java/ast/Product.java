@@ -6,11 +6,13 @@ import writer.Writer;
 
 public class Product extends BinaryOperation {
 
+	public Product(Operation left, Operation right, boolean delayed) {
+		super(left, right, delayed);
+	}
+
 	public Product(Operation left, Operation right) {
 		super(left, right);
 	}
-
-
 
 	public Operation getLeft(){
 		return left;

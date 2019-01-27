@@ -60,10 +60,10 @@ public class JsonComputator implements Computator {
         //rulesJsonArray
         JSONObject rule = getRule("abs", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -71,10 +71,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Acos operation) {
         JSONObject rule = getRule("acos", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -82,11 +82,11 @@ public class JsonComputator implements Computator {
     public Operation compute(Addition operation) {
         JSONObject rule = getRule("Addition", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_left", operation.getLeft());
-        context.put("this_right", operation.getRight());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_left", operation.getLeft());
+        scope.put("this_right", operation.getRight());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -94,10 +94,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Asin operation) {
         JSONObject rule = getRule("asin", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -105,17 +105,17 @@ public class JsonComputator implements Computator {
     public Operation compute(Atan operation) {
         JSONObject rule = getRule("atan", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
     @Override
     public Operation compute(Constant operation) {
         JSONObject rule = getRule("Number", rulesJsonArray);
-        return (new JsonParser()).getOperation(rule);
+        return (new JsonParser()).getOperation(rule, false);
 
     }
 
@@ -123,10 +123,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Cos operation) {
         JSONObject rule = getRule("cos", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -134,11 +134,11 @@ public class JsonComputator implements Computator {
     public Operation compute(Division operation) {
         JSONObject rule = getRule("Division", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_left", operation.getLeft());
-        context.put("this_right", operation.getRight());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_left", operation.getLeft());
+        scope.put("this_right", operation.getRight());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -146,10 +146,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Exp operation) {
         JSONObject rule = getRule("exp", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -157,10 +157,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Log operation) {
         JSONObject rule = getRule("log", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -169,9 +169,9 @@ public class JsonComputator implements Computator {
     public Operation compute(Negate operation) {
         JSONObject rule = getRule("Negate", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_expression", operation.getOp());
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_expression", operation.getOp());
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         Operation readyTree = rawTree.accept(new DelayedEnforcer(rulesFileName));
         return readyTree;
 
@@ -181,11 +181,11 @@ public class JsonComputator implements Computator {
     public Operation compute(Pow operation) {
         JSONObject rule = getRule("Pow", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_left", operation.getLeft());
-        context.put("this_right", operation.getRight());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_left", operation.getLeft());
+        scope.put("this_right", operation.getRight());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -193,28 +193,28 @@ public class JsonComputator implements Computator {
     public Operation compute(Product operation) {
         JSONObject rule = getRule("Product", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_left", operation.getLeft());
-        context.put("this_right", operation.getRight());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_left", operation.getLeft());
+        scope.put("this_right", operation.getRight());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
     @Override
     public Operation compute(SimpleVar operation) {
         JSONObject rule = getRule("Identifier", rulesJsonArray);
-        return (new JsonParser()).getOperation(rule);
+        return (new JsonParser()).getOperation(rule, false);
     }
 
     @Override
     public Operation compute(Sin operation) {
         JSONObject rule = getRule("sin", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -222,21 +222,21 @@ public class JsonComputator implements Computator {
     public Operation compute(Sqrt operation) {
         JSONObject rule = getRule("sqrt", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
     @Override
     public Operation compute(Substraction operation) {
         JSONObject rule = getRule("Subtraction", rulesJsonArray);
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_left", operation.getLeft());
-        context.put("this_right", operation.getRight());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_left", operation.getLeft());
+        scope.put("this_right", operation.getRight());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 
@@ -244,10 +244,10 @@ public class JsonComputator implements Computator {
     public Operation compute(Tan operation) {
         JSONObject rule = getRule("tan", rulesJsonArray);
 
-        Map<String, Operation> context = new HashMap<>();
-        context.put("this_arg", operation.getOp());
+        Map<String, Operation> scope = new HashMap<>();
+        scope.put("this_arg", operation.getOp());
 
-        Operation rawTree = (new JsonParser(context)).getOperation(rule);
+        Operation rawTree = (new JsonParser(scope)).getOperation(rule, false);
         return rawTree.accept(new DelayedEnforcer(rulesFileName));
     }
 

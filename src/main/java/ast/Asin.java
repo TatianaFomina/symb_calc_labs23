@@ -6,8 +6,11 @@ import writer.Writer;
 
 public class Asin extends UnaryOperation {
 
+	public Asin(Operation op, boolean delayed) {
+		super(op, delayed);
+	}
 	public Asin(Operation op) {
-		super(op);
+		super(op, false);
 	}
 
 
