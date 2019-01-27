@@ -23,7 +23,11 @@ public class Division extends BinaryOperation {
 	}
 	
 	public String toString(){
-		return "(" + left.toString() + ")/(" + right.toString() + ")";
+		String leftStr = left instanceof Constant || left instanceof SimpleVar ?
+				left.toString() : "(" + left.toString() + ")";
+		String rightStr = right instanceof Constant || right instanceof SimpleVar ?
+				right.toString() : "(" + right.toString() + ")";
+		return leftStr + "/" + rightStr;
 	}
 
 	@Override

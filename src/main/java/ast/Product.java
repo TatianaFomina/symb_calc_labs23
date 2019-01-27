@@ -23,7 +23,13 @@ public class Product extends BinaryOperation {
 	}
 
 	public String toString(){
-		return "(" + left.toString() + ")*(" + right.toString() + ")";
+		String leftStr = left instanceof Constant || left instanceof SimpleVar ||
+				left instanceof UnaryOperation ?
+				left.toString() : "(" + left.toString() + ")";
+		String rightStr = right instanceof Constant || right instanceof SimpleVar ||
+				right instanceof UnaryOperation ?
+				right.toString() : "(" + right.toString() + ")";
+		return leftStr + "*" + rightStr;
 	}
 
 	@Override
